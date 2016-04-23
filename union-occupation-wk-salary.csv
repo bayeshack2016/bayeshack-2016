@@ -1,0 +1,71 @@
+"","X","OCCUPATION","X2014.TOTAL","X2014.UNION.MEMBER","X2014.UNION.REPR","X2014.NON.UNION","X2015.TOTAL","X2015.UNION.MEMBER","X2015.UNION.REPR","X2015.NON.UNION","OCC_CODE"
+"1",1,"Management, professional, and related occupations","1,137","1,132","1,129","1,139","1,158","1,152","1,148","1,160",1
+"2",2,"Management, business, and financial operations occupations","1,227","1,246","1,243","1,226","1,258","1,273","1,291","1,257",2
+"3",3,"Management occupations","1,295","1,333","1,333","1,292","1,351","1,386","1,380","1,349",3
+"4",4,"Business and financial operations occupations","1,107","1,135","1,131","1,104","1,137","1,108","1,132","1,138",4
+"5",5,"Professional and related occupations","1,078","1,117","1,112","1,068","1,112","1,140","1,132","1,103",5
+"6",6,"Computer and mathematical occupations","1,368","1,288","1,277","1,373","1,428","1,388","1,327","1,434",6
+"7",7,"Architecture and engineering occupations","1,377","1,416","1,424","1,370","1,424","1,393","1,399","1,427",7
+"8",8,"Life, physical, and social science occupations","1,168","1,271","1,276","1,141","1,206","1,249","1,266","1,187",8
+"9",9,"Community and social service occupations","858","1,017","1,010","822","889","1,014","1,008","855",9
+"10",10,"Legal occupations","1,271","1,208","1,333","1,270","1,391","1,551","1,547","1,373",10
+"11",11,"Education, training, and library occupations","953","1,077","1,069","851","956","1,095","1,074","860",11
+"12",12,"Arts, design, entertainment, sports, and media occupations","956","1,130","1,110","946","1,001","1,228","1,212","984",12
+"13",13,"Healthcare practitioner and technical occupations","1,033","1,128","1,115","1,020","1,041","1,211","1,194","1,014",13
+"14",14,"Service occupations","505","762","751","482","509","753","742","489",14
+"15",15,"Healthcare support occupations","498","569","558","493","498","544","546","495",15
+"16",16,"Protective service occupations","833","1,107","1,093","687","796","1,031","1,029","687",16
+"17",17,"Food preparation and serving related occupations","439","535","525","433","441","515","512","436",17
+"18",18,"Building and grounds cleaning and maintenance occupations","480","644","633","456","486","648","628","469",18
+"19",19,"Personal care and service occupations","487","591","583","480","498","515","521","496",19
+"20",20,"Sales and office occupations","666","788","788","654","673","810","801","662",20
+"21",21,"Sales and related occupations","705","728","724","704","716","702","710","716",21
+"22",22,"Office and administrative support occupations","651","801","801","632","656","831","821","639",22
+"23",23,"Natural resources, construction, and maintenance occupations","756","1,076","1,062","705","761","1,070","1,052","711",23
+"24",24,"Farming, fishing, and forestry occupations","429","Ð","Ð","423","464","Ð","Ð","460",24
+"25",25,"Construction and extraction occupations","756","1,095","1,078","697","749","1,082","1,064","695",25
+"26",26,"Installation, maintenance, and repair occupations","821","1,064","1,057","782","839","1,066","1,051","799",26
+"27",27,"Production, transportation, and material moving occupations","642","838","830","614","656","850","842","622",27
+"28",28,"Production occupations","646","825","824","620","663","824","826","635",28
+"29",29,"Transportation and material moving occupations","637","850","836","608","646","876","859","610",29
+"30",32,"Private sector","763","907","900","753","776","917","912","765",30
+"31",33,"Agriculture and related industries","502","Ð","Ð","501","522","Ð","Ð","519",31
+"32",34,"Nonagricultural industries","767","907","901","756","781","918","913","769",32
+"33",35,"Mining, quarrying, and oil and gas extraction","1,136","1,150","1,176","1,130","1,162","Ð","1,170","1,162",33
+"34",36,"Construction","775","1,123","1,108","724","784","1,099","1,093","743",34
+"35",37,"Manufacturing","812","861","854","807","839","876","868","833",35
+"36",38,"Durable goods","840","888","886","833","872","889","881","871",36
+"37",39,"Nondurable goods","765","808","795","761","776","849","841","768",37
+"38",40,"Wholesale and retail trade","641","669","670","638","653","673","671","652",38
+"39",41,"Wholesale trade","818","772","773","821","841","876","863","840",39
+"40",42,"Retail trade","602","641","643","600","610","621","622","609",40
+"41",43,"Transportation and utilities","826","1,011","1,009","785","843","1,007","1,003","803",41
+"42",44,"Transportation and warehousing","780","947","947","748","790","980","977","754",42
+"43",45,"Utilities","1,156","1,275","1,283","1,078","1,133","1,194","1,188","1,116",43
+"44",46,"Information(4)","1,040","1,115","1,090","1,029","1,102","1,260","1,242","1,077",44
+"45",47,"Publishing, except Internet","1,068","Ð","Ð","1,081","1,098","Ð","Ð","1,102",45
+"46",48,"Motion pictures and sound recording industries","1,021","Ð","Ð","993","996","Ð","Ð","935",46
+"47",49,"Radio and television broadcasting and cable subscription programming","902","Ð","Ð","879","980","Ð","Ð","968",47
+"48",50,"Telecommunications","1,145","1,143","1,114","1,151","1,162","1,212","1,208","1,148",48
+"49",51,"Financial activities","941","879","884","942","964","915","924","964",49
+"50",52,"Finance and insurance","989","880","893","991","1,024","983","1,004","1,024",50
+"51",53,"Finance","1,012","862","889","1,014","1,061","923","1,082","1,060",51
+"52",54,"Insurance","959","Ð","Ð","960","973","988","981","973",52
+"53",55,"Real estate and rental and leasing","768","876","869","762","782","891","893","772",53
+"54",56,"Professional and business services","915","805","851","918","951","874","906","953",54
+"55",57,"Professional and technical services","1,199","1,081","1,145","1,203","1,256","1,297","1,268","1,255",55
+"56",58,"Management, administrative, and waste services","580","743","735","575","605","684","672","603",56
+"57",59,"Education and health services","777","926","925","763","787","962","946","768",57
+"58",60,"Educational services","902","967","978","879","918","1,025","1,015","896",58
+"59",61,"Health care and social assistance","750","893","886","740","754","916","904","742",59
+"60",62,"Leisure and hospitality","505","636","624","500","515","606","592","511",60
+"61",63,"Arts, entertainment, and recreation","650","688","683","642","657","672","680","655",61
+"62",64,"Accommodation and food services","481","602","591","478","492","579","558","489",62
+"63",65,"Accommodation","544","639","639","522","546","645","639","532",63
+"64",66,"Food services and drinking places","465","496","485","465","480","492","490","480",64
+"65",67,"Other services(4)","644","871","843","636","684","903","879","677",65
+"66",68,"Other services, except private households","671","887","865","662","710","916","900","703",66
+"67",69,"Public sector","927","1,014","1,014","850","944","1,029","1,023","878",67
+"68",70,"Federal government","1,103","1,050","1,072","1,136","1,113","1,058","1,064","1,159",68
+"69",71,"State government","886","967","966","821","909","988","982","867",69
+"70",72,"Local government","899","1,026","1,020","780","914","1,043","1,033","783",70
