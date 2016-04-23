@@ -47,16 +47,24 @@ shinyServer(function(input, output) {
   
   output$table2 <- renderTable({
     #data.frame(x=data())
-MSA=lookup$msa[which(lookup$zip==input$zip)]
-ofInterest=subset(data2,area==MSA)
+    Occ=as.character(input$occ)
+  MSA=lookup$msa[which(lookup$zip==input$zip)]
+  print(MSA)
+  ofInterest=subset(data2,area==MSA)
+  ofInterest=subset(ofInterest,occ.title==Occ)
     #State=as.character(input$state)
     # Occ=as.character(input$occ)
     # #ofInterest=subset(data,STATE==State)
     # ofInterest=subset(data2,OCC_TITLE==Occ)
-    # toDisplay=ofInterest[1,c("H_MEAN","A_MEAN")]
-    # names(toDisplay)=c("Hourly Mean", "Annual Mean")
-    # rownames(toDisplay)=NULL
-    # data.frame(toDisplay)
+  #toDisplay=rbind(cbind("Average Hourly Mean","Average Annual Mean"),
+  #cbind(mean(ofInterest$H_MEAN,na.rm=T),mean(ofInterest$A_MEAN,na.rm=T)))
+  toDisplay=ofInterest[1,c("h_mean","a_mean")]  
+  #toDisplay=cbind(mean(as.numeric(as.character(ofInterest$h_mean)),na.rm=T),
+   #                 mean(as.numeric(as.character(ofInterest$a_mean)),na.rm=T))
+    
+    names(toDisplay)=c("Hourly Mean","Annual Mean")
+    rownames(toDisplay)=NULL
+    data.frame(toDisplay)
     
   })
   
