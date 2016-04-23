@@ -16,7 +16,9 @@ shinyUI(fluidPage(
       
       br(),
       selectInput("occ", "Choose your occupation:", 
-                  choices=unique(as.character(data$OCC_TITLE)))
+                  choices=unique(as.character(data$OCC_TITLE))),
+      textInput("salary",label="What is your current annual salary?",value="50000"),
+      textInput("hour",label="What is your current pay per hour?",value="10")
       
     ),
     

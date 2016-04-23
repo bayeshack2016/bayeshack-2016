@@ -23,8 +23,14 @@ shinyServer(function(input, output) {
     Occ=as.character(input$occ)
     ofInterest=subset(data,STATE==State)
     ofInterest=subset(ofInterest,OCC_TITLE==Occ)
-    x=as.numeric(as.character(ofInterest[1,19:23]))
-    y=as.numeric(as.character(ofInterest[1,14:17]))
+    #x=as.numeric(as.character(ofInterest[1,19:23]))
+    inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
+   x= as.numeric(gsub(",","",inter))
+   inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
+   y= as.numeric(gsub(",","",inter))
+    #y=as.numeric(as.character(ofInterest[1,14:17]))
+    #print(x)
+    #print(y)
     #19:23 annual
     #14:17 hourly
     par(mfrow=c(1,2)) 
@@ -46,6 +52,7 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Annual $",main="")
+    abline(v=as.numeric(as.character(input$salary)),col="red")
     init <- -(abs(min(y)) + 5)
     fin  <- 2*abs(max(y)) + 5
     
@@ -57,6 +64,7 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Hourly $",main="")
+    abline(v=as.numeric(as.character(input$hour)),col="red")
   })
   
   output$plot2 <- renderPlot({
@@ -66,8 +74,13 @@ shinyServer(function(input, output) {
     #print(MSA)
     ofInterest=subset(data2,area==MSA)
     ofInterest=subset(ofInterest,occ.title==Occ)
-    y=as.numeric(as.character(ofInterest[1,18:22]))
-    x=as.numeric(as.character(ofInterest[1,23:27]))
+    #y=as.numeric(as.character(ofInterest[1,18:22]))
+    #x=as.numeric(as.character(ofInterest[1,23:27]))
+    
+    inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
+    x= as.numeric(gsub(",","",inter))
+    inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
+    y= as.numeric(gsub(",","",inter))
    
     #18:22 hourly
     # 23:27 annual
@@ -90,6 +103,7 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Annual $",main="")
+    abline(v=as.numeric(as.character(input$salary)),col="red")
     init <- -(abs(min(y)) + 5)
     fin  <- 2*abs(max(y)) + 5
     
@@ -101,6 +115,7 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Hourly $",main="")
+    abline(v=as.numeric(as.character(input$hour)),col="red")
   })
   
   # Generate a summary of the data
@@ -145,5 +160,9 @@ shinyServer(function(input, output) {
     data.frame(toDisplay)
     
   })
+  
+  
+  
+  
   
 })
