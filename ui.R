@@ -11,8 +11,9 @@ shinyUI(fluidPage(
   # br() element to introduce extra vertical spacing
   sidebarLayout(
     sidebarPanel(
-      textInput("state", label = "Choose a state. (case sensitive)", value = "California"),
-      textInput("zip", label = "Choose your zipcode.", value = "94704"),
+      selectInput("state", label = "Choose your state:", 
+                  choices=unique(as.character(data$STATE)), selected = "California"),
+      textInput("zip", label = "Choose your zipcode:", value = "94704"),
       
       br(),
       selectInput("occ", "Choose your occupation:", 
