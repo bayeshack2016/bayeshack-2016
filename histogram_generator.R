@@ -22,12 +22,24 @@ distribution_generator<- function(x){
 }
 
 dist_x<- distribution_generator(x)
+
+#make a ggplot on one distribtuion
+df<- as.data.frame(dist_x)
+ggplot(df, aes(x = dist_x)) + 
+  geom_histogram(xlim = c(0, 3*max(dist_x)/4), binwidth = 0.75)+
+  labs(title = "Distribution of Wages", x = "Wage", y= "Frequency")+
+  geom_vline(data=df, aes(xintercept=mean(dist_x)))
+
+
+# make a ggplot overlaying the first with a second distribtuion
 dist_y<- distribution_generator(y)
 dat<- melt(data.frame(dist_x, dist_y))
-
 mean_dat <- ddply(dat, "variable", summarise, wage.mean=mean(value))
 
 ggplot(dat, aes(x = value, fill = variable)) + 
   geom_histogram(xlim = c(0, 3*max(max(dist_x), max(dist_y))/4), binwidth = 0.75, alpha = 0.5)+
-  labs(title = "Distribtuion of Wages", x = "Wage", y= "Frequency")+
-  geom_vline(data=mean_dat, aes(xintercept=wage.mean,  colour=variable))
+  labs(title = "Distribution of Wages", x = "Wage", y= "Frequency")+
+  geom_vline(data=mean_dat, aes(xintercept=wage.mean,  colour=variable))+ 
+  scale_fill_discrete(name="Level",
+                    breaks=c("dist_x", "dist_y"),
+                    labels=c("Distribution 1", "Distribution 2"))
