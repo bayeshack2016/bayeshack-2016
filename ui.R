@@ -17,14 +17,15 @@ shinyUI(fluidPage(
       br(),
       selectInput("occ", "Choose your occupation:", 
                   choices=unique(as.character(data$OCC_TITLE)))
+      
     ),
     
     # Show a tabset that includes a plot, summary, and table view
     # of the generated distribution
     mainPanel(
       tabsetPanel(type = "tabs", 
-                  tabPanel("State Level", tableOutput("table")), 
-                  tabPanel("Zip Code Level", tableOutput("table2"))
+                  tabPanel("State Level", tableOutput("table"),plotOutput("plot")), 
+                  tabPanel("Zip Code Level", tableOutput("table2"),plotOutput("plot2"),value=2)
                   #tabPanel("Summary", verbatimTextOutput("summary")), 
                   #tabPanel("Table", tableOutput("table"))
       )
