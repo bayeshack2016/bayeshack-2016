@@ -3,6 +3,9 @@ library(shiny)
 # Define server logic for random distribution application
 shinyServer(function(input, output) {
   data=read.csv("stateLevelOccSal.csv")
+  data2=read.csv("fullDataMSA.csv")
+#
+  lookup=read.csv("zipToMSA.csv")
   # Reactive expression to generate the requested distribution.
   # This is called whenever the inputs change. The output
   # functions defined below then all use the value computed from
@@ -39,6 +42,21 @@ shinyServer(function(input, output) {
     names(toDisplay)=c("Hourly Mean", "Annual Mean")
     rownames(toDisplay)=NULL
     data.frame(toDisplay)
+    
+  })
+  
+  output$table2 <- renderTable({
+    #data.frame(x=data())
+MSA=lookup$msa[which(lookup$zip==input$zip)]
+ofInterest=subset(data2,area==MSA)
+    #State=as.character(input$state)
+    # Occ=as.character(input$occ)
+    # #ofInterest=subset(data,STATE==State)
+    # ofInterest=subset(data2,OCC_TITLE==Occ)
+    # toDisplay=ofInterest[1,c("H_MEAN","A_MEAN")]
+    # names(toDisplay)=c("Hourly Mean", "Annual Mean")
+    # rownames(toDisplay)=NULL
+    # data.frame(toDisplay)
     
   })
   

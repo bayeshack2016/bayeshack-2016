@@ -1,5 +1,5 @@
 library(shiny)
-
+data=read.csv("stateLevelOccSal.csv")
 # Define UI for random distribution application 
 shinyUI(fluidPage(
   
@@ -12,6 +12,7 @@ shinyUI(fluidPage(
   sidebarLayout(
     sidebarPanel(
       textInput("state", label = "Choose a state. (case sensitive)", value = "California"),
+      textInput("zip", label = "Choose your zipcode.", value = "94704"),
       
       br(),
       selectInput("occ", "Choose your occupation:", 
@@ -22,7 +23,8 @@ shinyUI(fluidPage(
     # of the generated distribution
     mainPanel(
       tabsetPanel(type = "tabs", 
-                  tabPanel("State Level", tableOutput("table"))#, 
+                  tabPanel("State Level", tableOutput("table")), 
+                  tabPanel("Zip Code Level", tableOutput("table2"))
                   #tabPanel("Summary", verbatimTextOutput("summary")), 
                   #tabPanel("Table", tableOutput("table"))
       )
