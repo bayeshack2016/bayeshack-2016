@@ -13,6 +13,9 @@ histgen<- function(x){
   })
   # sample from s, total of freq values, with probabilities from prob 
   out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-  histogram<- hist(out, xlim=c(min(out), max(out)/2))
+  
+  histogram<- qplot(out, geom="histogram", xlim = c(0, 3*max(out)/4), 
+                    fill = I("blue"), binwidth = 0.75,
+                    main = "Distribution of Wages",  xlab = "Hourly Wage", ylab = "Frequency")
   return(histogram)  
 }
