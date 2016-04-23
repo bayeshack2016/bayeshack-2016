@@ -29,8 +29,8 @@ shinyServer(function(input, output) {
    inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
    y= as.numeric(gsub(",","",inter))
     #y=as.numeric(as.character(ofInterest[1,14:17]))
-    #print(x)
-    #print(y)
+    print(x)
+    print(y)
     #19:23 annual
     #14:17 hourly
     par(mfrow=c(1,2)) 
@@ -43,7 +43,9 @@ shinyServer(function(input, output) {
     # range of values beyond x to sample from
     init <- -(abs(min(x)) + 5)
     fin  <- 2*abs(max(x)) + 5
-    
+    if(length(x)<5){
+      
+    }else{
     ival <- c(init, x, fin) # generate the sequence to take pairs from
     len <- 100 # sequence of each pair
     s <- sapply(2:length(ival), function(i) {
@@ -53,10 +55,13 @@ shinyServer(function(input, output) {
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Annual $",main="")
     abline(v=as.numeric(as.character(input$salary)),col="red")
+    }
     init <- -(abs(min(y)) + 5)
     fin  <- 2*abs(max(y)) + 5
-    
-    ival <- c(init, x, fin) # generate the sequence to take pairs from
+    if(length(y)<5){
+      
+    }else{
+    ival <- c(init, y, fin) # generate the sequence to take pairs from
     len <- 100 # sequence of each pair
     s <- sapply(2:length(ival), function(i) {
       seq(ival[i-1], ival[i], length.out=len)
@@ -65,6 +70,7 @@ shinyServer(function(input, output) {
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Hourly $",main="")
     abline(v=as.numeric(as.character(input$hour)),col="red")
+    }
   })
   
   output$plot2 <- renderPlot({
@@ -81,7 +87,7 @@ shinyServer(function(input, output) {
     x= as.numeric(gsub(",","",inter))
     inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
-   
+  
     #18:22 hourly
     # 23:27 annual
     par(mfrow=c(1,2)) 
@@ -95,6 +101,9 @@ shinyServer(function(input, output) {
     init <- -(abs(min(x)) + 5)
     fin  <- 2*abs(max(x)) + 5
     
+    if(length(x)<5){
+      
+    }else{
     ival <- c(init, x, fin) # generate the sequence to take pairs from
     len <- 100 # sequence of each pair
     s <- sapply(2:length(ival), function(i) {
@@ -104,10 +113,14 @@ shinyServer(function(input, output) {
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Annual $",main="")
     abline(v=as.numeric(as.character(input$salary)),col="red")
-    init <- -(abs(min(y)) + 5)
+    }
+     init <- -(abs(min(y)) + 5)
     fin  <- 2*abs(max(y)) + 5
     
-    ival <- c(init, x, fin) # generate the sequence to take pairs from
+    if(length(y)<5){
+      
+    }else{
+    ival <- c(init, y, fin) # generate the sequence to take pairs from
     len <- 100 # sequence of each pair
     s <- sapply(2:length(ival), function(i) {
       seq(ival[i-1], ival[i], length.out=len)
@@ -116,6 +129,7 @@ shinyServer(function(input, output) {
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Hourly $",main="")
     abline(v=as.numeric(as.character(input$hour)),col="red")
+    }
   })
   
   # Generate a summary of the data
