@@ -18,11 +18,34 @@ shinyServer(function(input, output) {
   # all expressions are called in the sequence implied by the
   # dependency graph
   output$plot <- renderPlot({
-    dist <- input$dist
-    n <- input$n
     
-    hist(data(), 
-         main=paste('r', dist, '(', n, ')', sep=''))
+    State=as.character(input$state)
+    Occ=as.character(input$occ)
+    ofInterest=subset(data,STATE==State)
+    ofInterest=subset(ofInterest,OCC_TITLE==Occ)
+    x=as.numeric(as.character(ofInterest[1,19:23]))
+    
+    #19:23 annual
+    #14:17 hourly
+    
+    #x<- c(9.07, 11.27, 17.40, 28.32, 44.29)
+    cum.p <- c(.1, .25, .5, .75, .9)
+    prob <- c( cum.p[1], diff(cum.p), .1)
+    
+    
+    freq <- 10000 
+    # range of values beyond x to sample from
+    init <- -(abs(min(x)) + 5)
+    fin  <- 2*abs(max(x)) + 5
+    
+    ival <- c(init, x, fin) # generate the sequence to take pairs from
+    len <- 100 # sequence of each pair
+    s <- sapply(2:length(ival), function(i) {
+      seq(ival[i-1], ival[i], length.out=len)
+    })
+    # sample from s, total of 10000 values with probabilities calculated above
+    out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    hist(out,xlab="Annual $",main="")
   })
   
   # Generate a summary of the data
@@ -49,7 +72,7 @@ shinyServer(function(input, output) {
     #data.frame(x=data())
     Occ=as.character(input$occ)
   MSA=lookup$msa[which(lookup$zip==input$zip)]
-  print(MSA)
+  #print(MSA)
   ofInterest=subset(data2,area==MSA)
   ofInterest=subset(ofInterest,occ.title==Occ)
     #State=as.character(input$state)
