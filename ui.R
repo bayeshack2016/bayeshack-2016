@@ -25,7 +25,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel("State Level", tableOutput("table"),plotOutput("plot")), 
-                  tabPanel("Zip Code Level", tableOutput("table2"),value=2)
+                  tabPanel("Zip Code Level", tableOutput("table2"),plotOutput("plot2"),value=2)
                   #tabPanel("Summary", verbatimTextOutput("summary")), 
                   #tabPanel("Table", tableOutput("table"))
       )
