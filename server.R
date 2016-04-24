@@ -1,4 +1,5 @@
 library(shiny)
+library(dplyr)
 require(gridExtra)
 require(ggplot2)
 
