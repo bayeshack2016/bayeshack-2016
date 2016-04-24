@@ -94,7 +94,9 @@ shinyServer(function(input, output) {
       plot1=(ggplot(df, aes(x = dist_x), environment = environment()) + 
         geom_histogram() + xlim(0, 3*max(dist_x)/4) +
         labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
-        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))+
+        theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
+
     }
     if(length(y)<5){
       noY=T
@@ -103,8 +105,9 @@ shinyServer(function(input, output) {
       plot2=(ggplot(df, aes(x = dist_y), environment = environment()) + 
         geom_histogram() + xlim(0, 3*max(dist_y)/4) +
         labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
-        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))
-        
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))+
+        theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
+
     }
     
     print(noX)
@@ -282,7 +285,9 @@ shinyServer(function(input, output) {
         geom_histogram() + xlim(0, 3*max(dist_x)/4) +
         labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))+
-        scale_fill_manual(values=c('black', 'blue'))
+        scale_fill_manual(values=c('black', 'blue'))+
+        theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
+
     }
     if(length(y)<5){
       noY=T
@@ -292,7 +297,8 @@ shinyServer(function(input, output) {
         geom_histogram() + xlim(0, 3*max(dist_y)/4) +
         labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))+
-        scale_fill_manual(values=c('black', 'blue'))
+        scale_fill_manual(values=c('black', 'blue'))+
+        theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
 
     }
     
