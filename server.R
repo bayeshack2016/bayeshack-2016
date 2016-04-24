@@ -72,99 +72,90 @@ shinyServer(function(input, output) {
    inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
    y= as.numeric(gsub(",","",inter))
    #y=y[-which(is.na(y))]
-   # if(length(x)<5){
-   #   
-   # }else{
-   # dist_x<- distribution_generator(x)
-   # }
-   # 
-   # if(length(y)<5){
-   #   
-   # }else{
-   # dist_y<-distribution_generator(y)
-   # }
+   if(length(x)<5){
+     
+   }else{
+   dist_x<- distribution_generator(x)
+   }
+   
+   if(length(y)<5){
+     
+   }else{
+   dist_y<-distribution_generator(y)
+   }
 
-    #y=as.numeric(as.character(ofInterest[1,14:17]))
-   # print(x)
-  #  print(y)
-   #plot(histgenA(x))
-    #19:23 annual
-    #14:17 hourly
-    par(mfrow=c(1,2)) 
-   
-   
-    # 
-    # noX=F
-    # noY=F
-    # if(length(x)<5){
-    #   noX=T
-    # }else{
-    #   df<- as.data.frame(dist_x)
-    #   plot1=(ggplot(df, aes(x = dist_x)) + 
-    #     geom_histogram(xlim = c(0, 3*max(dist_x)/4), binwidth = 0.75)+
-    #     labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
-    #     geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary)))))
-    # }
-    # if(length(y)<5){
-    #   noY=T
-    # }else{
-    #     df<- as.data.frame(dist_y)
-    #   plot2=(ggplot(df, aes(x = dist_y)) + 
-    #     geom_histogram(xlim = c(0, 3*max(dist_y)/4), binwidth = 0.75)+
-    #     labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
-    #     geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour)))))
-    #     
-    # }
-    # 
-    # print(noX)
-    # print(noY)
-    # if(noX & noY){
-    # }else if(noX){
-    #   grid.arrange(plot2,ncol=1)
-    # }else if(noY){
-    #   grid.arrange(plot1,ncol=1)
-    # }else{
-    #   grid.arrange(plot1,plot2,ncol=2)
-    # }
+
+    noX=F
+    noY=F
+    if(length(x)<5){
+      noX=T
+    }else{
+      df<- as.data.frame(dist_x)
+      plot1=(ggplot(df, aes(x = dist_x), environment = environment()) + 
+        geom_histogram(xlim = c(0, 3*max(dist_x)/4))+
+        labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))
+    }
+    if(length(y)<5){
+      noY=T
+    }else{
+        df<- as.data.frame(dist_y)
+      plot2=(ggplot(df, aes(x = dist_y), environment = environment()) + 
+        geom_histogram(xlim = c(0, 3*max(dist_y)/4))+
+        labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))
+        
+    }
+    
+    print(noX)
+    print(noY)
+    if(noX & noY){
+    }else if(noX){
+      grid.arrange(plot2,ncol=1)
+    }else if(noY){
+      grid.arrange(plot1,ncol=1)
+    }else{
+      grid.arrange(plot1,plot2,ncol=2)
+    }
     #geom_vline
     #x<- c(9.07, 11.27, 17.40, 28.32, 44.29)
-    cum.p <- c(.1, .25, .5, .75, .9)
-    prob <- c( cum.p[1], diff(cum.p), .1)
+    # cum.p <- c(.1, .25, .5, .75, .9)
+    # prob <- c( cum.p[1], diff(cum.p), .1)
 
 
-    freq <- 10000
-    # range of values beyond x to sample from
-    init <- -(abs(min(x)) + 5)
-    #print("here")
-    fin  <- 2*abs(max(x)) + 5
-    if(length(x)<5){
+    # freq <- 10000
+    # # range of values beyond x to sample from
+    # init <- -(abs(min(x)) + 5)
+    # #print("here")
+    # fin  <- 2*abs(max(x)) + 5
+    # if(length(x)<5){
 
-    }else{
-    ival <- c(init, x, fin) # generate the sequence to take pairs from
-    len <- 100 # sequence of each pair
-    s <- sapply(2:length(ival), function(i) {
-      seq(ival[i-1], ival[i], length.out=len)
-    })
-    # sample from s, total of 10000 values with probabilities calculated above
-    out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-    hist(out,xlab="Annual $",main="")
-    abline(v=as.numeric(as.character(input$salary)),col="red")
-    }
-    init <- -(abs(min(y)) + 5)
-    fin  <- 2*abs(max(y)) + 5
-    if(length(y)<5){
+    # }else{
+    # ival <- c(init, x, fin) # generate the sequence to take pairs from
+    # len <- 100 # sequence of each pair
+    # s <- sapply(2:length(ival), function(i) {
+    #   seq(ival[i-1], ival[i], length.out=len)
+    # })
+    # # sample from s, total of 10000 values with probabilities calculated above
+    # out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    # hist(out,xlab="Annual $",main="")
+    # abline(v=as.numeric(as.character(input$salary)),col="red")
+    # }
+    # init <- -(abs(min(y)) + 5)
+    # fin  <- 2*abs(max(y)) + 5
+    # if(length(y)<5){
 
-    }else{
-    ival <- c(init, y, fin) # generate the sequence to take pairs from
-    len <- 100 # sequence of each pair
-    s <- sapply(2:length(ival), function(i) {
-      seq(ival[i-1], ival[i], length.out=len)
-    })
-    # sample from s, total of 10000 values with probabilities calculated above
-    out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-    hist(out,xlab="Hourly $",main="")
-    abline(v=as.numeric(as.character(input$hour)),col="red")
-    }
+    # }else{
+    # ival <- c(init, y, fin) # generate the sequence to take pairs from
+    # len <- 100 # sequence of each pair
+    # s <- sapply(2:length(ival), function(i) {
+    #   seq(ival[i-1], ival[i], length.out=len)
+    # })
+    # # sample from s, total of 10000 values with probabilities calculated above
+    # out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    # hist(out,xlab="Hourly $",main="")
+    # abline(v=as.numeric(as.character(input$hour)),col="red")
+    # }
   })
   
   output$plot2 <- renderPlot({
@@ -180,60 +171,88 @@ shinyServer(function(input, output) {
     inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
     #y=y[-which(is.na(y))]
-    
-    cum.p <- c(.1, .25, .5, .75, .9)
-    prob <- c( cum.p[1], diff(cum.p), .1)
-    
-    
-    freq <- 10000 
-    # range of values beyond x to sample from
-    init <- -(abs(min(x)) + 5)
-    fin  <- 2*abs(max(x)) + 5
-    
-    firstX=T
-    firstY=T
-    if(length(x)<5){
-      firstX=F
+
+  if(length(x)<5){
+     
     }else{
-      ival <- c(init, x, fin) # generate the sequence to take pairs from
-      len <- 100 # sequence of each pair
-      s <- sapply(2:length(ival), function(i) {
-        seq(ival[i-1], ival[i], length.out=len)
-      })
-      # sample from s, total of 10000 values with probabilities calculated above
-      out1 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-      #hist(out,xlab="Annual $",main="")
-      #abline(v=as.numeric(as.character(input$salary)),col="red")
+    dist_x_state<- distribution_generator(x)
     }
-    init <- -(abs(min(y)) + 5)
-    fin  <- 2*abs(max(y)) + 5
+
+    if(length(y)<5){
+     
+    }else{
+    dist_y_state<-distribution_generator(y)
+    }
+    
+
+    Occ=as.character(input$occ)
+    MSA=lookup$msa[which(lookup$zip==input$zip)]
+    #print(MSA)
+    ofInterest=subset(data2,area==MSA)
+    ofInterest=subset(ofInterest,occ.title==Occ)
+    #y=as.numeric(as.character(ofInterest[1,18:22]))
+    #x=as.numeric(as.character(ofInterest[1,23:27]))
+    
+    inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
+    x= as.numeric(gsub(",","",inter))
+    #x=x[-which(is.na(x))]
+    inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
+    y= as.numeric(gsub(",","",inter))
+    #y=y[-which(is.na(y))]
+
+    # cum.p <- c(.1, .25, .5, .75, .9)
+    # prob <- c( cum.p[1], diff(cum.p), .1)
+    
+    
+    # freq <- 10000 
+    # # range of values beyond x to sample from
+    # init <- -(abs(min(x)) + 5)
+    # fin  <- 2*abs(max(x)) + 5
+    
+    # firstX=T
+    # firstY=T
+    # if(length(x)<5){
+    #   firstX=F
+    # }else{
+    #   ival <- c(init, x, fin) # generate the sequence to take pairs from
+    #   len <- 100 # sequence of each pair
+    #   s <- sapply(2:length(ival), function(i) {
+    #     seq(ival[i-1], ival[i], length.out=len)
+    #   })
+    #   # sample from s, total of 10000 values with probabilities calculated above
+    #   out1 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    #   #hist(out,xlab="Annual $",main="")
+    #   #abline(v=as.numeric(as.character(input$salary)),col="red")
+    # }
+    # init <- -(abs(min(y)) + 5)
+    # fin  <- 2*abs(max(y)) + 5
+    
+    # if(length(y)<5){
+    #   firstY=F
+    # }else{
+    #   ival <- c(init, y, fin) # generate the sequence to take pairs from
+    #   len <- 100 # sequence of each pair
+    #   s <- sapply(2:length(ival), function(i) {
+    #     seq(ival[i-1], ival[i], length.out=len)
+    #   })
+    #   # sample from s, total of 10000 values with probabilities calculated above
+    #   out2 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    #   #hist(out,xlab="Hourly $",main="")
+    #   #abline(v=as.numeric(as.character(input$hour)),col="red")
+    # }
+    
+    
+    if(length(x)<5){
+      
+    }else{
+    dist_x<- distribution_generator(x)
+    }
     
     if(length(y)<5){
-      firstY=F
+      
     }else{
-      ival <- c(init, y, fin) # generate the sequence to take pairs from
-      len <- 100 # sequence of each pair
-      s <- sapply(2:length(ival), function(i) {
-        seq(ival[i-1], ival[i], length.out=len)
-      })
-      # sample from s, total of 10000 values with probabilities calculated above
-      out2 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-      #hist(out,xlab="Hourly $",main="")
-      #abline(v=as.numeric(as.character(input$hour)),col="red")
+    dist_y<-distribution_generator(y)
     }
-    
-    
-    # if(length(x)<5){
-    #   
-    # }else{
-    # dist_x<- distribution_generator(x)
-    # }
-    # 
-    # if(length(y)<5){
-    #   
-    # }else{
-    # dist_y<-distribution_generator(y)
-    # }
     
     #y=as.numeric(as.character(ofInterest[1,14:17]))
     # print(x)
@@ -244,39 +263,41 @@ shinyServer(function(input, output) {
     #par(mfrow=c(1,2)) 
     
     
-    # 
-    # noX=F
-    # noY=F
-    # if(length(x)<5){
-    #   noX=T
-    # }else{
-    #   df<- as.data.frame(dist_x)
-    #   plot1=(ggplot(df, aes(x = dist_x)) + 
-    #     geom_histogram(xlim = c(0, 3*max(dist_x)/4), binwidth = 0.75)+
-    #     labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
-    #     geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary)))))
-    # }
-    # if(length(y)<5){
-    #   noY=T
-    # }else{
-    #     df<- as.data.frame(dist_y)
-    #   plot2=(ggplot(df, aes(x = dist_y)) + 
-    #     geom_histogram(xlim = c(0, 3*max(dist_y)/4), binwidth = 0.75)+
-    #     labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
-    #     geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour)))))
-    #     
-    # }
-    # 
-    # print(noX)
-    # print(noY)
-    # if(noX & noY){
-    # }else if(noX){
-    #   grid.arrange(plot2,ncol=1)
-    # }else if(noY){
-    #   grid.arrange(plot1,ncol=1)
-    # }else{
-    #   grid.arrange(plot1,plot2,ncol=2)
-    # }
+    
+    noX=F
+    noY=F
+    if(length(x)<5){
+      noX=T
+    }else{
+      df <- rbind(data.frame(x = dist_x, level = 'zip'), data.frame(x = dist_x_state, level = 'state'))
+      plot1=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
+        geom_histogram(xlim = c(0, 3*max(dist_x)/4))+
+        labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))+
+        scale_fill_manual(values=c('black', 'blue'))
+    }
+    if(length(y)<5){
+      noY=T
+    }else{
+        df<- data.frame(x = dist_y, level = 'zip')
+      plot2=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
+        geom_histogram(xlim = c(0, 3*max(dist_y)/4))+
+        labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
+        geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))+
+        scale_fill_manual(values=c('black', 'blue'))
+
+    }
+    
+    print(noX)
+    print(noY)
+    if(noX & noY){
+    }else if(noX){
+      grid.arrange(plot2,ncol=1)
+    }else if(noY){
+      grid.arrange(plot1,ncol=1)
+    }else{
+      grid.arrange(plot1,plot2,ncol=2)
+    }
     #geom_vline
     #x<- c(9.07, 11.27, 17.40, 28.32, 44.29)
     # cum.p <- c(.1, .25, .5, .75, .9)
@@ -316,67 +337,67 @@ shinyServer(function(input, output) {
     #   #abline(v=as.numeric(as.character(input$hour)),col="red")
     # }
     
-    ####
-    Occ=as.character(input$occ)
-    MSA=lookup$msa[which(lookup$zip==input$zip)]
-    #print(MSA)
-    ofInterest=subset(data2,area==MSA)
-    ofInterest=subset(ofInterest,occ.title==Occ)
-    #y=as.numeric(as.character(ofInterest[1,18:22]))
-    #x=as.numeric(as.character(ofInterest[1,23:27]))
+    # ####
+    # Occ=as.character(input$occ)
+    # MSA=lookup$msa[which(lookup$zip==input$zip)]
+    # #print(MSA)
+    # ofInterest=subset(data2,area==MSA)
+    # ofInterest=subset(ofInterest,occ.title==Occ)
+    # #y=as.numeric(as.character(ofInterest[1,18:22]))
+    # #x=as.numeric(as.character(ofInterest[1,23:27]))
     
-    inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
-    x= as.numeric(gsub(",","",inter))
-    #x=x[-which(is.na(x))]
-    inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
-    y= as.numeric(gsub(",","",inter))
-    #y=y[-which(is.na(y))]
+    # inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
+    # x= as.numeric(gsub(",","",inter))
+    # #x=x[-which(is.na(x))]
+    # inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
+    # y= as.numeric(gsub(",","",inter))
+    # #y=y[-which(is.na(y))]
   
-    #18:22 hourly
-    # 23:27 annual
-    par(mfrow=c(1,2)) 
-    #x<- c(9.07, 11.27, 17.40, 28.32, 44.29)
-    cum.p <- c(.1, .25, .5, .75, .9)
-    prob <- c( cum.p[1], diff(cum.p), .1)
+    # #18:22 hourly
+    # # 23:27 annual
+    # par(mfrow=c(1,2)) 
+    # #x<- c(9.07, 11.27, 17.40, 28.32, 44.29)
+    # cum.p <- c(.1, .25, .5, .75, .9)
+    # prob <- c( cum.p[1], diff(cum.p), .1)
     
     
-    freq <- 10000 
-    # range of values beyond x to sample from
-    init <- -(abs(min(x)) + 5)
-    fin  <- 2*abs(max(x)) + 5
+    # freq <- 10000 
+    # # range of values beyond x to sample from
+    # init <- -(abs(min(x)) + 5)
+    # fin  <- 2*abs(max(x)) + 5
     
-    if(length(x)<5){
+    # if(length(x)<5){
       
-    }else{
-    ival <- c(init, x, fin) # generate the sequence to take pairs from
-    len <- 100 # sequence of each pair
-    s <- sapply(2:length(ival), function(i) {
-      seq(ival[i-1], ival[i], length.out=len)
-    })
-    # sample from s, total of 10000 values with probabilities calculated above
-    out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-    hist(out,xlab="Annual $",main="")
+    # }else{
+    # ival <- c(init, x, fin) # generate the sequence to take pairs from
+    # len <- 100 # sequence of each pair
+    # s <- sapply(2:length(ival), function(i) {
+    #   seq(ival[i-1], ival[i], length.out=len)
+    # })
+    # # sample from s, total of 10000 values with probabilities calculated above
+    # out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    # hist(out,xlab="Annual $",main="")
     
-    if(firstX==T){hist(out1,col="blue",add=T)}
-    abline(v=as.numeric(as.character(input$salary)),col="red")
-    }
-     init <- -(abs(min(y)) + 5)
-    fin  <- 2*abs(max(y)) + 5
+    # if(firstX==T){hist(out1,col="blue",add=T)}
+    # abline(v=as.numeric(as.character(input$salary)),col="red")
+    # }
+    #  init <- -(abs(min(y)) + 5)
+    # fin  <- 2*abs(max(y)) + 5
     
-    if(length(y)<5){
+    # if(length(y)<5){
       
-    }else{
-    ival <- c(init, y, fin) # generate the sequence to take pairs from
-    len <- 100 # sequence of each pair
-    s <- sapply(2:length(ival), function(i) {
-      seq(ival[i-1], ival[i], length.out=len)
-    })
-    # sample from s, total of 10000 values with probabilities calculated above
-    out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
-    hist(out,xlab="Hourly $",main="")
-    if(firstY==T){hist(out2,col="blue",add=T)}
-    abline(v=as.numeric(as.character(input$hour)),col="red")
-    }
+    # }else{
+    # ival <- c(init, y, fin) # generate the sequence to take pairs from
+    # len <- 100 # sequence of each pair
+    # s <- sapply(2:length(ival), function(i) {
+    #   seq(ival[i-1], ival[i], length.out=len)
+    # })
+    # # sample from s, total of 10000 values with probabilities calculated above
+    # out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+    # hist(out,xlab="Hourly $",main="")
+    # if(firstY==T){hist(out2,col="blue",add=T)}
+    # abline(v=as.numeric(as.character(input$hour)),col="red")
+    # }
   })
   
   # Generate a summary of the data
