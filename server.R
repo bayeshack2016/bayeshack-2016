@@ -21,7 +21,28 @@ distribution_generator<- function(x){
 
 # Define server logic for random distribution application
 shinyServer(function(input, output) {
+  #data=read.csv("stateLevelOccSal.csv")
+  
   data=read.csv("stateLevelOccSal.csv")
+  data$OCC_CODE_PREFIX=as.numeric(sapply(data$OCC_CODE, substring, 0, 2))
+  
+  membership=read.csv("union-occupation-membership.csv")
+  salary=read.csv("union-occupation-wk-salary.csv")
+  
+  #membership$OCC_CODE = seq.int(nrow(membership))
+  #salary$OCC_CODE = seq.int(nrow(salary))
+  #write.csv(membership, "union-occupation-membership.csv")
+  #write.csv(salary, "union-occupation-wk-salary.csv")
+  
+  union_occ_lookup=read.csv("union-occ-lookup.csv")
+  
+  data_with_union = data %>%
+    left_join(union_occ_lookup, by=c("OCC_CODE_PREFIX" = "REG_OCC_CODE_PREFIX")) %>%
+    left_join(salary, by=c("UNION_OCC_CODE" = "OCC_CODE"))
+  
+  data=data_with_union
+  
+  
   data2=read.csv("fullDataMSA.csv")
 #
   lookup=read.csv("zipToMSA.csv")
@@ -318,8 +339,8 @@ shinyServer(function(input, output) {
     Occ=as.character(input$occ)
     ofInterest=subset(data,STATE==State)
     ofInterest=subset(ofInterest,OCC_TITLE==Occ)
-    toDisplay=ofInterest[1,c("H_MEAN","A_MEAN")]
-    names(toDisplay)=c("Hourly Mean", "Annual Mean")
+    toDisplay=ofInterest[1,c("H_MEAN","A_MEAN","X2015.UNION.MEMBER","X2015.UNION.REPR","X2015.NON.UNION")]
+    names(toDisplay)=c("Hourly Mean", "Annual Mean","Weekly Mean Union Member","Weekly Mean Union Represented","Weekly Mean No Union")
     rownames(toDisplay)=NULL
     data.frame(toDisplay)
     
