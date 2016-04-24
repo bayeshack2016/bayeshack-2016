@@ -28,7 +28,7 @@ shinyUI(fluidPage(
     mainPanel(
       tabsetPanel(type = "tabs", 
                   tabPanel("State Level", tableOutput("table"),plotOutput("plot")), 
-                  tabPanel("Zip Code Level", tableOutput("table2"),plotOutput("plot2"),h3("In Blue: Salaries in Your State"),h3("In White: Salaries in Your Zipcode"))
+                  tabPanel("Zip Code Level", tableOutput("table2"),plotOutput("plot2"),h6("In Blue: Salaries in Your State"),h6("In White: Salaries in Your Zipcode"))
                   #tabPanel("Summary", verbatimTextOutput("summary")), 
                   #tabPanel("Table", tableOutput("table"))
       )
