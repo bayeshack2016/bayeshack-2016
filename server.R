@@ -92,7 +92,7 @@ shinyServer(function(input, output) {
     }else{
       df<- as.data.frame(dist_x)
       plot1=(ggplot(df, aes(x = dist_x), environment = environment()) + 
-        geom_histogram() + xlim(0, 3*max(dist_x)/4) +
+        geom_histogram() + xlim(0, NA) +
         labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))+
         theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
@@ -103,7 +103,7 @@ shinyServer(function(input, output) {
     }else{
         df<- as.data.frame(dist_y)
       plot2=(ggplot(df, aes(x = dist_y), environment = environment()) + 
-        geom_histogram() + xlim(0, 3*max(dist_y)/4) +
+        geom_histogram() + xlim(0, NA) +
         labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))+
         theme(axis.text.y=element_blank(), axis.title.y=element_blank(), axis.ticks.y=element_blank())
@@ -282,7 +282,7 @@ shinyServer(function(input, output) {
     }else{
       df <- rbind(wrap_in_df(dist_x, 'zip'), wrap_in_df(dist_x_state, 'state'))
       plot1=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
-        geom_histogram() + xlim(0, 3*max(dist_x)/4) +
+        geom_histogram() + xlim(0, NA) +
         labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$salary))), colour='red', size=1))+
         scale_fill_manual(values=c('black', 'blue'))+
@@ -294,7 +294,7 @@ shinyServer(function(input, output) {
     }else{
         df<- rbind(wrap_in_df(dist_y, 'zip'), wrap_in_df(dist_y_state, 'state'))
       plot2=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
-        geom_histogram() + xlim(0, 3*max(dist_y)/4) +
+        geom_histogram() + xlim(0, NA) +
         labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+
         geom_vline(data=df, aes(xintercept=as.numeric(as.character(input$hour))), colour='red', size=1))+
         scale_fill_manual(values=c('black', 'blue'))+
