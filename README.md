@@ -1,4 +1,4 @@
-A visualization for workers to see how their wages stack up against others in similar locations and occupations, based on data from the Bureau of #Labor Statistics. This is a first step toward enabling workers to argue for fairer wages.
+A visualization for workers to see how their wages stack up against others in similar locations and occupations, based on data from the Bureau of Labor Statistics. This is a first step toward enabling workers to argue for fairer wages. #dol
 
 # Demo
 
