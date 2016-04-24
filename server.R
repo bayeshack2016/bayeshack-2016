@@ -175,6 +175,49 @@ shinyServer(function(input, output) {
     inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
     
+    
+    cum.p <- c(.1, .25, .5, .75, .9)
+    prob <- c( cum.p[1], diff(cum.p), .1)
+    
+    
+    freq <- 10000 
+    # range of values beyond x to sample from
+    init <- -(abs(min(x)) + 5)
+    fin  <- 2*abs(max(x)) + 5
+    
+    firstX=T
+    firstY=T
+    if(length(x)<5){
+      firstX=F
+    }else{
+      ival <- c(init, x, fin) # generate the sequence to take pairs from
+      len <- 100 # sequence of each pair
+      s <- sapply(2:length(ival), function(i) {
+        seq(ival[i-1], ival[i], length.out=len)
+      })
+      # sample from s, total of 10000 values with probabilities calculated above
+      out1 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+      #hist(out,xlab="Annual $",main="")
+      #abline(v=as.numeric(as.character(input$salary)),col="red")
+    }
+    init <- -(abs(min(y)) + 5)
+    fin  <- 2*abs(max(y)) + 5
+    
+    if(length(y)<5){
+      firstY=F
+    }else{
+      ival <- c(init, y, fin) # generate the sequence to take pairs from
+      len <- 100 # sequence of each pair
+      s <- sapply(2:length(ival), function(i) {
+        seq(ival[i-1], ival[i], length.out=len)
+      })
+      # sample from s, total of 10000 values with probabilities calculated above
+      out2 <- sample(s, freq, prob=rep(prob, each=len), replace = T)
+      #hist(out,xlab="Hourly $",main="")
+      #abline(v=as.numeric(as.character(input$hour)),col="red")
+    }
+    
+    
     # if(length(x)<5){
     #   
     # }else{
@@ -306,6 +349,8 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Annual $",main="")
+    
+    if(firstX==T){hist(out1,col="blue",add=T)}
     abline(v=as.numeric(as.character(input$salary)),col="red")
     }
      init <- -(abs(min(y)) + 5)
@@ -322,6 +367,7 @@ shinyServer(function(input, output) {
     # sample from s, total of 10000 values with probabilities calculated above
     out <- sample(s, freq, prob=rep(prob, each=len), replace = T)
     hist(out,xlab="Hourly $",main="")
+    if(firstY==T){hist(out2,col="blue",add=T)}
     abline(v=as.numeric(as.character(input$hour)),col="red")
     }
   })
