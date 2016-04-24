@@ -63,6 +63,7 @@ shinyServer(function(input, output) {
     Occ=as.character(input$occ)
     ofInterest=subset(data,STATE==State)
     ofInterest=subset(ofInterest,OCC_TITLE==Occ)
+    #print(nrow(ofInterest))
     #x=as.numeric(as.character(ofInterest[1,19:23]))
     inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
    x= as.numeric(gsub(",","",inter))
@@ -132,6 +133,7 @@ shinyServer(function(input, output) {
     freq <- 10000
     # range of values beyond x to sample from
     init <- -(abs(min(x)) + 5)
+    #print("here")
     fin  <- 2*abs(max(x)) + 5
     if(length(x)<5){
 
