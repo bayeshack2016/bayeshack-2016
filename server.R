@@ -427,8 +427,8 @@ shinyServer(function(input, output) {
     Occ=as.character(input$occ)
     ofInterest=subset(data,STATE==State)
     ofInterest=subset(ofInterest,OCC_TITLE==Occ)
-    toDisplay=ofInterest[1,c("H_MEAN","A_MEAN","X2015.UNION.MEMBER","X2015.UNION.REPR","X2015.NON.UNION")]
-    names(toDisplay)=c("Hourly Mean", "Annual Mean","Weekly Mean Union Member","Weekly Mean Union Represented","Weekly Mean No Union")
+    toDisplay=ofInterest[1,c("H_MEAN","A_MEAN")]
+    names(toDisplay)=c("Hourly Mean", "Annual Mean")
     rownames(toDisplay)=NULL
     data.frame(toDisplay)
     
@@ -456,9 +456,42 @@ shinyServer(function(input, output) {
     data.frame(toDisplay)
     
   })
+
+  getUnionColumn <- function(state, occ, column) {
+    State=as.character(input$state)
+    Occ=as.character(input$occ)
+    ofInterest=subset(data,STATE==State)
+    ofInterest=subset(ofInterest,OCC_TITLE==Occ)
+    ofInterest[1, c(column)][1]
+  }
   
+  output$unionInfo1 <- renderText({
+    amt = getUnionColumn(input$state, input$occ, "X2015.UNION.MEMBER")
+    if (is.na(amt)) {
+      ""
+    } else {
+      paste0("If you were a union member in this occupation, you would earn, on average, $", 
+        amt, " a week") 
+    }
+  })
+
+  output$unionInfo2 <- renderText({
+    amt = getUnionColumn(input$state, input$occ, "X2015.UNION.REPR")
+    if (is.na(amt)) {
+      ""
+    } else {
+      paste0("If you were represented by a union in this occupation, you would earn, on average, $", 
+        amt, " a week")      
+    }
+  })
   
-  
-  
-  
+  output$unionInfo3 <- renderText({
+    amt = getUnionColumn(input$state, input$occ, "X2015.NON.UNION")
+    if (is.na(amt)) {
+      ""
+    } else {
+      paste0("If you had no union affiliation in this occupation, you would earn, on average, $", 
+        amt, " a week")      
+    }
+  })
 })

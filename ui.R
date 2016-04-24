@@ -27,7 +27,8 @@ shinyUI(fluidPage(
     # of the generated distribution
     mainPanel(
       tabsetPanel(type = "tabs", 
-                  tabPanel("State Level", tableOutput("table"),plotOutput("plot")), 
+                  tabPanel("State Level", tableOutput("table"),plotOutput("plot"), 
+                    p(textOutput("unionInfo1")), p(textOutput("unionInfo2")), p(textOutput("unionInfo3"))), 
                   tabPanel("Zip Code Level", tableOutput("table2"),plotOutput("plot2"))
                   #tabPanel("Summary", verbatimTextOutput("summary")), 
                   #tabPanel("Table", tableOutput("table"))
