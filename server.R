@@ -67,9 +67,10 @@ shinyServer(function(input, output) {
     #x=as.numeric(as.character(ofInterest[1,19:23]))
     inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
    x= as.numeric(gsub(",","",inter))
+   #x=x[-which(is.na(x))]
    inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
    y= as.numeric(gsub(",","",inter))
-   
+   #y=y[-which(is.na(y))]
    # if(length(x)<5){
    #   
    # }else{
@@ -174,9 +175,10 @@ shinyServer(function(input, output) {
     #x=as.numeric(as.character(ofInterest[1,19:23]))
     inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
     x= as.numeric(gsub(",","",inter))
+   #x=x[-which(is.na(x))]
     inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
-    
+    #y=y[-which(is.na(y))]
     
     cum.p <- c(.1, .25, .5, .75, .9)
     prob <- c( cum.p[1], diff(cum.p), .1)
@@ -324,8 +326,10 @@ shinyServer(function(input, output) {
     
     inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
     x= as.numeric(gsub(",","",inter))
+    #x=x[-which(is.na(x))]
     inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
+    #y=y[-which(is.na(y))]
   
     #18:22 hourly
     # 23:27 annual
