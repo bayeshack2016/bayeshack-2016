@@ -68,10 +68,10 @@ shinyServer(function(input, output) {
     #x=as.numeric(as.character(ofInterest[1,19:23]))
     inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
    x= as.numeric(gsub(",","",inter))
-   #x=x[-which(is.na(x))]
-   inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
+   x=x[!is.na(x)]
+   inter=apply(ofInterest[1,14:18],2,function(x){as.character(x)})
    y= as.numeric(gsub(",","",inter))
-   #y=y[-which(is.na(y))]
+   y=y[!is.na(y)]
    if(length(x)<5){
      
    }else{
@@ -158,6 +158,16 @@ shinyServer(function(input, output) {
     # }
   })
   
+  wrap_in_df <- function(vec, level) {
+    if (length(vec) == 0) {
+      data.frame()
+    }
+    else {
+      data.frame(x = vec, level = level)
+    }
+  }
+  
+
   output$plot2 <- renderPlot({
     
     State=as.character(input$state)
@@ -167,19 +177,19 @@ shinyServer(function(input, output) {
     #x=as.numeric(as.character(ofInterest[1,19:23]))
     inter=apply(ofInterest[1,19:23],2,function(x){as.character(x)})
     x= as.numeric(gsub(",","",inter))
-   #x=x[-which(is.na(x))]
-    inter=apply(ofInterest[1,14:17],2,function(x){as.character(x)})
+    x=x[!is.na(x)]
+    inter=apply(ofInterest[1,14:18],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
-    #y=y[-which(is.na(y))]
+    y=y[!is.na(y)]
 
   if(length(x)<5){
-     
+     dist_x_state <- c()
     }else{
     dist_x_state<- distribution_generator(x)
     }
 
     if(length(y)<5){
-     
+     dist_y_state <- c()
     }else{
     dist_y_state<-distribution_generator(y)
     }
@@ -195,10 +205,10 @@ shinyServer(function(input, output) {
     
     inter=apply(ofInterest[1,23:27],2,function(x){as.character(x)})
     x= as.numeric(gsub(",","",inter))
-    #x=x[-which(is.na(x))]
+    x=x[!is.na(x)]
     inter=apply(ofInterest[1,18:22],2,function(x){as.character(x)})
     y= as.numeric(gsub(",","",inter))
-    #y=y[-which(is.na(y))]
+    y=y[!is.na(y)]
 
     # cum.p <- c(.1, .25, .5, .75, .9)
     # prob <- c( cum.p[1], diff(cum.p), .1)
@@ -243,13 +253,13 @@ shinyServer(function(input, output) {
     
     
     if(length(x)<5){
-      
+      dist_x <- c()
     }else{
     dist_x<- distribution_generator(x)
     }
     
     if(length(y)<5){
-      
+      dist_y <- c()
     }else{
     dist_y<-distribution_generator(y)
     }
@@ -262,14 +272,12 @@ shinyServer(function(input, output) {
     #14:17 hourly
     #par(mfrow=c(1,2)) 
     
-    
-    
     noX=F
     noY=F
     if(length(x)<5){
       noX=T
     }else{
-      df <- rbind(data.frame(x = dist_x, level = 'zip'), data.frame(x = dist_x_state, level = 'state'))
+      df <- rbind(wrap_in_df(dist_x, 'zip'), wrap_in_df(dist_x_state, 'state'))
       plot1=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
         geom_histogram(xlim = c(0, 3*max(dist_x)/4))+
         labs(title = "Distribution of Annual Salary", x = "Annual Salary", y= "Frequency")+
@@ -279,7 +287,7 @@ shinyServer(function(input, output) {
     if(length(y)<5){
       noY=T
     }else{
-        df<- data.frame(x = dist_y, level = 'zip')
+        df<- rbind(wrap_in_df(dist_y, 'zip'), wrap_in_df(dist_y_state, 'state'))
       plot2=(ggplot(df, aes(x = x, fill = level), environment = environment()) + 
         geom_histogram(xlim = c(0, 3*max(dist_y)/4))+
         labs(title = "Distribution of Hourly Wages", x = "Hourly Wage", y= "Frequency")+

@@ -4,7 +4,7 @@ data=read.csv("stateLevelOccSal.csv")
 shinyUI(fluidPage(
   
   # Application title
-  titlePanel("Bayes Hack: Labor"),
+  titlePanel("Are You Paid Fairly?"),
   
   # Sidebar with controls to select the random distribution type
   # and number of observations to generate. Note the use of the
